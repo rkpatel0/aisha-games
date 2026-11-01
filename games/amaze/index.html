@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amaze! 🌟</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🌟</text></svg>">
+  <link rel="stylesheet" href="../../core/shell.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="ag-no-select">
+
+  <div class="ama-page">
+    <!-- the shared header is inserted here by core/shell.js -->
+
+    <p class="ama-banner" role="status" aria-live="polite"></p>
+
+    <div class="ama-view ama-view--levels">
+      <div class="ama-levels"></div>
+    </div>
+
+    <div class="ama-view ama-view--maze" hidden>
+      <div class="ama-hud">
+        <span class="ama-hud-level">Level 1</span>
+        <span class="ama-hud-stars">⭐ 0 / 3</span>
+      </div>
+      <canvas class="ama-canvas"></canvas>
+    </div>
+  </div>
+
+  <script src="../../core/util.js"></script>
+  <script src="../../core/store.js"></script>
+  <script src="../../core/audio.js"></script>
+  <script src="../../core/fx.js"></script>
+  <script src="../../core/shell.js"></script>
+  <script src="maze.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

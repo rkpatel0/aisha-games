@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aisha's Games</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🎈</text></svg>">
+  <link rel="stylesheet" href="core/shell.css">
+  <link rel="stylesheet" href="core/home.css">
+</head>
+<body>
+
+  <main class="home">
+    <h1 class="home-title">Aisha's Games</h1>
+    <p class="home-sub">Pick a game to play! 🌸🎈⭐</p>
+    <div class="home-grid" id="home-grid"></div>
+  </main>
+
+  <script src="core/util.js"></script>
+  <script src="core/games.js"></script>
+  <script>
+    const { el } = AG.util;
+    const grid = document.getElementById('home-grid');
+
+    if (!AG.games.length) {
+      grid.append(el('p', { class: 'home-empty', text: 'No games yet — add one to core/games.js!' }));
+    }
+
+    for (const game of AG.games) {
+      grid.append(el('a', {
+        class: 'home-card',
+        href: game.dir,
+        style: { '--home-accent': game.accent || 'var(--ag-pink)' },
+      }, [
+        el('span', { class: 'home-card-emoji', text: game.emoji, 'aria-hidden': 'true' }),
+        el('span', { class: 'home-card-title', text: game.title }),
+        el('span', { class: 'home-card-blurb', text: game.blurb }),
+        el('span', { class: 'home-card-players', text: game.players }),
+      ]));
+    }
+  </script>
+</body>
+</html>

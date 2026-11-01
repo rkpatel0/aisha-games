@@ -1,0 +1,210 @@
+/* ---------------- Petal Pairs ---------------- */
+
+.pp-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---------- scoreboard ---------- */
+
+.pp-scores {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(10px, 2vw, 22px);
+  padding: 0 16px;
+}
+
+.pp-player {
+  --pp-accent: var(--ag-pink);
+  flex: 0 1 240px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 22px;
+  background: #fff;
+  border: 4px solid transparent;
+  border-radius: var(--ag-radius);
+  box-shadow: 0 6px 16px rgba(96, 62, 130, 0.12);
+  opacity: 0.55;
+  transform: scale(0.95);
+  transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+
+.pp-player[data-player="2"] { --pp-accent: var(--ag-blue); }
+
+.pp-player.is-active {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--pp-accent);
+  box-shadow: 0 10px 24px rgba(96, 62, 130, 0.2);
+}
+
+.pp-player-name {
+  font-size: clamp(15px, 1.5vw, 19px);
+  font-weight: 800;
+  color: var(--pp-accent);
+  line-height: 1.2;
+}
+
+.pp-player-sub {
+  font-size: clamp(12px, 1.1vw, 14px);
+  font-weight: 700;
+  color: var(--ag-ink-soft);
+}
+
+.pp-player-score {
+  margin-left: auto;
+  font-size: clamp(30px, 3.6vw, 44px);
+  font-weight: 900;
+  color: var(--pp-accent);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+/* ---------- turn banner ---------- */
+
+.pp-turn {
+  margin: clamp(10px, 1.6vh, 18px) 0 clamp(6px, 1.2vh, 14px);
+  text-align: center;
+  font-size: clamp(22px, 2.8vw, 34px);
+  font-weight: 900;
+  letter-spacing: -0.4px;
+  color: var(--ag-ink);
+  min-height: 1.2em;
+}
+.pp-turn .pp-hl { color: var(--pp-turn-color, var(--ag-pink)); }
+
+.pp-turn.is-bumped { animation: pp-bump 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes pp-bump {
+  40% { transform: scale(1.12); }
+}
+
+/* ---------- board ---------- */
+
+.pp-board-wrap {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 0 16px clamp(20px, 4vh, 44px);
+}
+
+.pp-board {
+  width: min(92vw, calc(100vh - 250px), 820px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px, 1.3vw, 16px);
+}
+
+/* ---------- cards ---------- */
+
+.pp-card {
+  aspect-ratio: 1;
+  perspective: 1000px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 18px;
+}
+.pp-card:focus-visible { outline: 4px solid var(--ag-blue); outline-offset: 4px; }
+
+.pp-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.45, 1.3, 0.5, 1);
+}
+
+.pp-card.is-face-up .pp-card-inner { transform: rotateY(180deg); }
+
+.pp-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 8px 18px rgba(96, 62, 130, 0.22);
+  overflow: hidden;
+}
+
+/* The card back — identical on every card: polka dots AND stars. */
+.pp-face--cover {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='%23fff6b8'%3E%3Cg transform='translate(3,4) scale(0.8)'%3E%3Cpath d='M12 2 15 9 22 9.6 16.6 14.3 18.3 21 12 17.2 5.7 21 7.4 14.3 2 9.6 9 9z'/%3E%3C/g%3E%3Cg transform='translate(34,32) scale(1)'%3E%3Cpath d='M12 2 15 9 22 9.6 16.6 14.3 18.3 21 12 17.2 5.7 21 7.4 14.3 2 9.6 9 9z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(circle at 46px 12px, rgba(255, 255, 255, 0.92) 5px, transparent 6px),
+    radial-gradient(circle at 14px 44px, rgba(255, 255, 255, 0.6) 4px, transparent 5px),
+    linear-gradient(135deg, #8b5cf6 0%, #ff5c9e 52%, #3aa8ff 100%);
+  background-size: 64px 64px, 64px 64px, 64px 64px, 100% 100%;
+  border: 4px solid #fff;
+}
+
+.pp-card:hover .pp-face--cover { filter: brightness(1.08); }
+.pp-card:active .pp-card-inner { transform: scale(0.96); }
+.pp-card.is-face-up:active .pp-card-inner { transform: rotateY(180deg) scale(0.96); }
+
+.pp-face--flower {
+  transform: rotateY(180deg);
+  background: #fff;
+  border: 4px solid #ffe3f1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6%;
+}
+
+.pp-face--flower svg {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+.pp-flower-name {
+  font-size: clamp(11px, 1.05vw, 17px);
+  font-weight: 800;
+  color: var(--ag-ink-soft);
+  white-space: nowrap;
+}
+
+/* ---------- matched ---------- */
+
+.pp-card.is-matched { cursor: default; }
+
+.pp-card.is-matched .pp-face--flower {
+  border-color: var(--ag-green);
+  box-shadow: 0 0 0 4px rgba(47, 201, 138, 0.35), 0 8px 18px rgba(47, 201, 138, 0.3);
+}
+
+/* Aisha's favourite bit: matched cards wiggle before they are collected. */
+.pp-card.is-wiggling { animation: pp-wiggle 0.8s ease-in-out; z-index: 5; }
+
+@keyframes pp-wiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  12% { transform: rotate(-10deg) scale(1.1); }
+  26% { transform: rotate(10deg) scale(1.1); }
+  40% { transform: rotate(-8deg) scale(1.08); }
+  54% { transform: rotate(8deg) scale(1.08); }
+  68% { transform: rotate(-5deg) scale(1.05); }
+  84% { transform: rotate(4deg) scale(1.03); }
+}
+
+.pp-card.is-settling .pp-card-inner { transition: transform 0.35s ease, opacity 0.35s ease; }
+.pp-card.is-matched .pp-card-inner { transform: rotateY(180deg) scale(0.94); }
+
+/* ---------- win panel bits ---------- */
+
+.pp-win-trophy { font-size: 68px; line-height: 1; }
+.pp-final {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 14px;
+  font-size: clamp(17px, 1.8vw, 21px);
+  font-weight: 800;
+}
+.pp-final span:first-child { color: var(--ag-pink); }
+.pp-final span:last-child { color: var(--ag-blue); }

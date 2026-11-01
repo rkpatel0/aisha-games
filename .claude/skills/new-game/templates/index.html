@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}} {{EMOJI}}</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>{{EMOJI}}</text></svg>">
+  <link rel="stylesheet" href="../../core/shell.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="ag-no-select">
+
+  <div class="{{PREFIX}}-page">
+    <!-- the shared header is inserted here by core/shell.js -->
+
+    <p class="{{PREFIX}}-banner" role="status" aria-live="polite"></p>
+
+    <div class="{{PREFIX}}-stage-wrap">
+      <div class="{{PREFIX}}-stage"></div>
+    </div>
+  </div>
+
+  <script src="../../core/util.js"></script>
+  <script src="../../core/store.js"></script>
+  <script src="../../core/audio.js"></script>
+  <script src="../../core/fx.js"></script>
+  <script src="../../core/shell.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

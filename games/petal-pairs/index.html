@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Petal Pairs 🌸</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🌸</text></svg>">
+  <link rel="stylesheet" href="../../core/shell.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="ag-no-select">
+
+  <div class="pp-page">
+    <!-- the shared header is inserted here by core/shell.js -->
+
+    <div class="pp-scores">
+      <div class="pp-player is-active" data-player="1">
+        <div>
+          <div class="pp-player-name">Player 1</div>
+          <div class="pp-player-sub">0 pairs</div>
+        </div>
+        <div class="pp-player-score">0</div>
+      </div>
+      <div class="pp-player" data-player="2">
+        <div>
+          <div class="pp-player-name">Player 2</div>
+          <div class="pp-player-sub">0 pairs</div>
+        </div>
+        <div class="pp-player-score">0</div>
+      </div>
+    </div>
+
+    <p class="pp-turn" role="status" aria-live="polite"></p>
+
+    <div class="pp-board-wrap">
+      <div class="pp-board" role="grid" aria-label="Memory card board"></div>
+    </div>
+  </div>
+
+  <script src="../../core/util.js"></script>
+  <script src="../../core/store.js"></script>
+  <script src="../../core/audio.js"></script>
+  <script src="../../core/fx.js"></script>
+  <script src="../../core/shell.js"></script>
+  <script src="flowers.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

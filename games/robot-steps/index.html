@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Robot Steps 🤖</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🤖</text></svg>">
+  <link rel="stylesheet" href="../../core/shell.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="ag-no-select">
+
+  <div class="rs-page">
+    <!-- the shared header is inserted here by core/shell.js -->
+
+    <p class="rs-banner" role="status" aria-live="polite"></p>
+
+    <div class="rs-view rs-view--levels">
+      <div class="rs-levels"></div>
+    </div>
+
+    <div class="rs-view rs-view--play" hidden>
+      <div class="rs-board-wrap">
+        <canvas class="rs-canvas"></canvas>
+      </div>
+
+      <div class="rs-controls">
+        <div class="rs-row-label">Blocks</div>
+        <div class="rs-palette"></div>
+
+        <div class="rs-row-label">My plan</div>
+        <div class="rs-strip"></div>
+
+        <div class="rs-buttons">
+          <button class="ag-btn ag-btn--green rs-play" type="button">▶️ Play</button>
+          <button class="ag-btn ag-btn--quiet rs-reset" type="button">↺ Reset</button>
+          <button class="ag-btn ag-btn--quiet rs-clear" type="button">🧹 Clear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../core/util.js"></script>
+  <script src="../../core/store.js"></script>
+  <script src="../../core/audio.js"></script>
+  <script src="../../core/fx.js"></script>
+  <script src="../../core/shell.js"></script>
+  <script src="levels.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+/* ---------------- ABC Caterpillar ---------------- */
+/* Every class here is prefixed .ac- so games never collide.
+   Use the --ag-* tokens from core/shell.css for colour and spacing. */
+
+.ac-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.ac-banner {
+  margin: clamp(10px, 1.6vh, 18px) 0;
+  padding: 0 16px;
+  text-align: center;
+  font-size: clamp(22px, 2.8vw, 34px);
+  font-weight: 900;
+  letter-spacing: -0.4px;
+  min-height: 1.2em;
+}
+.ac-banner .ac-hl { color: #5aa52c; }
+.ac-banner .ac-letter {
+  display: inline-grid;
+  place-items: center;
+  width: 1.4em;
+  height: 1.4em;
+  margin: 0 2px;
+  border-radius: 50%;
+  background: var(--ag-purple);
+  color: #fff;
+  vertical-align: middle;
+}
+
+.ac-banner .ac-letter.is-done { background: #5aa52c; }
+.ac-banner .ac-letter.is-next { background: var(--ag-pink); }
+.ac-banner .ac-gap { display: inline-block; width: 0.6em; }
+.ac-banner .ac-emoji { font-size: 1.3em; vertical-align: middle; }
+
+.ac-banner.is-bumped { animation: ac-bump 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes ac-bump { 40% { transform: scale(1.12); } }
+
+.ac-view { flex: 1; display: flex; flex-direction: column; align-items: center; }
+.ac-view--levels { justify-content: center; padding-bottom: 6vh; }
+
+/* ---------- level select ---------- */
+
+.ac-levels {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(10px, 1.6vw, 20px);
+  width: min(92vw, 640px, calc(100vh - 200px));
+  padding: 0 16px clamp(20px, 4vh, 44px);
+}
+
+.ac-level {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: inherit;
+  border: 4px solid transparent;
+  border-radius: var(--ag-radius);
+  background: var(--ag-card);
+  box-shadow: var(--ag-shadow);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.ac-level:hover:not(:disabled) {
+  transform: translateY(-5px);
+  border-color: #7ac943;
+  box-shadow: var(--ag-shadow-lift);
+}
+.ac-level:active:not(:disabled) { transform: scale(0.96); }
+.ac-level:focus-visible { outline: 4px solid #7ac943; outline-offset: 3px; }
+
+.ac-level-num {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 900;
+  color: var(--ag-purple);
+  line-height: 1;
+}
+.ac-level-info { font-size: clamp(10px, 1vw, 13px); font-weight: 700; color: var(--ag-ink-soft); }
+
+.ac-level:disabled {
+  cursor: default;
+  background: #f1ecf7;
+  box-shadow: none;
+  opacity: 0.75;
+}
+.ac-level:disabled .ac-level-num { color: #b9aecb; }
+.ac-level-lock { font-size: clamp(15px, 1.6vw, 20px); line-height: 1; }
+
+.ac-level.is-done { border-color: #7ac943; }
+.ac-level.is-done .ac-level-num { color: #5aa52c; }
+
+/* ---------- kids / grown-ups tabs ---------- */
+
+.ac-tabs {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px;
+  margin-bottom: clamp(12px, 2vh, 20px);
+  border-radius: 999px;
+  background: var(--ag-card);
+  box-shadow: var(--ag-shadow);
+}
+.ac-tab {
+  font: inherit;
+  font-size: clamp(15px, 1.5vw, 18px);
+  font-weight: 800;
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ag-ink-soft);
+  cursor: pointer;
+}
+.ac-tab.is-on { background: #7ac943; color: #fff; }
+.ac-tab[data-mode="grown"].is-on { background: var(--ag-purple); }
+
+.ac-daily {
+  font: inherit;
+  font-size: clamp(15px, 1.5vw, 19px);
+  font-weight: 800;
+  padding: 12px 26px;
+  margin-bottom: clamp(12px, 2vh, 20px);
+  border: 3px solid var(--ag-yellow);
+  border-radius: var(--ag-radius);
+  background: #fff8e1;
+  color: var(--ag-ink);
+  box-shadow: var(--ag-shadow);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.ac-daily:hover { transform: translateY(-3px); }
+
+/* Grown-ups: one row per chapter, its name on the left. */
+.ac-levels.is-grown {
+  grid-template-columns: auto repeat(5, 1fr);
+  gap: clamp(6px, 1vw, 12px);
+  width: min(92vw, 620px, calc((100vh - 300px) * 1.05));
+}
+.ac-levels.is-grown .ac-level { border-radius: 16px; }
+.ac-levels.is-grown .ac-level-num { font-size: clamp(18px, 2.2vw, 26px); }
+.ac-levels.is-grown .ac-level:hover:not(:disabled) { border-color: var(--ag-purple); }
+.ac-levels.is-grown .ac-level.is-done { border-color: var(--ag-purple); }
+.ac-levels.is-grown .ac-level.is-done .ac-level-num { color: var(--ag-purple); }
+.ac-chapter {
+  align-self: center;
+  justify-self: end;
+  padding-right: 6px;
+  font-size: clamp(12px, 1.3vw, 15px);
+  font-weight: 800;
+  color: var(--ag-ink-soft);
+  white-space: nowrap;
+}
+
+/* ---------- board ---------- */
+
+.ac-hud {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 30px);
+  font-size: clamp(17px, 1.9vw, 23px);
+  font-weight: 800;
+  color: var(--ag-ink-soft);
+  margin-bottom: clamp(8px, 1.4vh, 14px);
+}
+.ac-hud-time { font-variant-numeric: tabular-nums; color: var(--ag-purple); }
+.ac-hud-pick { display: inline-flex; align-items: center; gap: 8px; }
+.ac-hud-step {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ag-card);
+  box-shadow: var(--ag-shadow);
+  color: var(--ag-purple);
+  font: inherit;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.ac-hud-step:hover:not(:disabled) { transform: scale(1.1); }
+.ac-hud-step:disabled { opacity: 0.3; cursor: default; box-shadow: none; }
+
+.ac-board {
+  /* width/height set from JS to keep the grid's aspect ratio */
+  display: block;
+  max-width: calc(100vw - 32px);
+  background: var(--ag-card);
+  border-radius: var(--ag-radius-lg);
+  box-shadow: var(--ag-shadow);
+  overflow: visible;   /* antennae poke above the top row */
+  touch-action: none;
+  cursor: pointer;
+}
+.ac-board.is-blocked { animation: ac-wiggle 0.3s; }
+@keyframes ac-wiggle {
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.ac-cell { fill: #f6fbef; }
+.ac-cell.is-alt { fill: #edf7e1; }
+.ac-leaf { fill: #9ad66a; }
+.ac-leaf-vein { stroke: #6fb33f; stroke-width: 2.5; stroke-linecap: round; }
+
+.ac-wall { stroke: #2f6b16; stroke-width: 18; stroke-linecap: round; }
+.ac-wall-leaves { stroke: #8fd14f; stroke-width: 7; stroke-linecap: round; stroke-dasharray: 1 12; }
+
+.ac-body { fill: none; stroke: #8fd14f; stroke-width: 60; stroke-linecap: round; stroke-linejoin: round; }
+.ac-seg { fill: #7ac943; }
+.ac-head { fill: #5aa52c; }
+.ac-eye { fill: #fff; }
+.ac-pupil { fill: var(--ag-ink); }
+.ac-cheek { fill: #ff9fc3; }
+.ac-antenna { stroke: #5aa52c; stroke-width: 5; stroke-linecap: round; fill: none; }
+.ac-antenna-tip { fill: var(--ag-pink); }
+
+.ac-dot { fill: var(--ag-purple); }
+.ac-dot.is-done { fill: #3f8a1c; }
+.ac-dot.is-next { fill: var(--ag-pink); }
+.ac-dot-text {
+  fill: #fff;
+  font-family: var(--ag-font);
+  font-weight: 900;
+  font-size: 44px;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+.ac-pulse {
+  fill: none;
+  stroke: var(--ag-pink);
+  stroke-width: 6;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ac-pulse 1.2s ease-out infinite;
+}
+@keyframes ac-pulse {
+  from { transform: scale(0.9); opacity: 0.9; }
+  to { transform: scale(1.35); opacity: 0; }
+}
+
+.ac-hint-ring {
+  fill: rgba(255, 197, 49, 0.35);
+  stroke: var(--ag-yellow);
+  stroke-width: 8;
+  animation: ac-blink 0.5s ease-in-out 4 alternate;
+}
+@keyframes ac-blink { from { opacity: 1; } to { opacity: 0.25; } }
+
+.ac-controls {
+  display: flex;
+  gap: clamp(12px, 2vw, 20px);
+  margin: clamp(14px, 2.4vh, 24px) 0 clamp(20px, 4vh, 40px);
+}
+.ac-hint { background: var(--ag-yellow); color: var(--ag-ink); }

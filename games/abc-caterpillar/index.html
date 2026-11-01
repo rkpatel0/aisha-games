@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABC Caterpillar 🐛</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🐛</text></svg>">
+  <link rel="stylesheet" href="../../core/shell.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="ag-no-select">
+
+  <div class="ac-page">
+    <!-- the shared header is inserted here by core/shell.js -->
+
+    <p class="ac-banner" role="status" aria-live="polite"></p>
+
+    <div class="ac-view ac-view--levels">
+      <div class="ac-tabs" role="tablist">
+        <button class="ac-tab" type="button" role="tab" data-mode="kids">🐛 Kids</button>
+        <button class="ac-tab" type="button" role="tab" data-mode="grown">🦋 Grown-ups</button>
+      </div>
+      <button class="ac-daily" type="button" hidden></button>
+      <div class="ac-levels"></div>
+    </div>
+
+    <div class="ac-view ac-view--play" hidden>
+      <div class="ac-hud">
+        <span class="ac-hud-pick">
+          <button class="ac-hud-step ac-hud-prev" type="button" aria-label="Previous level">◀</button>
+          <span class="ac-hud-level">Level 1</span>
+          <button class="ac-hud-step ac-hud-next" type="button" aria-label="Next level">▶</button>
+        </span>
+        <span class="ac-hud-leaves">🍃 0 left</span>
+        <span class="ac-hud-time" hidden>⏱ 0:00</span>
+      </div>
+      <svg class="ac-board" role="img" aria-label="Caterpillar puzzle"></svg>
+      <div class="ac-controls">
+        <button class="ag-btn ag-btn--quiet ac-undo" type="button">↩ Undo</button>
+        <button class="ag-btn ac-hint" type="button">💡 Hint</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../core/util.js"></script>
+  <script src="../../core/store.js"></script>
+  <script src="../../core/audio.js"></script>
+  <script src="../../core/fx.js"></script>
+  <script src="../../core/shell.js"></script>
+  <script src="music.js"></script>
+  <script src="puzzles.js"></script>
+  <script src="levels-data.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

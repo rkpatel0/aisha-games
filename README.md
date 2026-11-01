@@ -21,6 +21,8 @@ Runs as a real Mac app, or straight from the browser. No internet needed.
 ./build-app.sh
 ```
 
+**On the web** — https://rkpatel0.github.io/aisha-games/ (updates when `main` is pushed).
+
 **In a browser** — double-click `index.html`, or run `./serve.sh` for
 `http://localhost:8777`.
 

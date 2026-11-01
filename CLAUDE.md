@@ -87,6 +87,16 @@ before they show up in the app.
 - Hard-reload the browser (cmd+shift+R) after editing `core/*` — plain reloads
   serve the cached copy and you will debug a stale file.
 
+## On the web
+
+Public at **https://rkpatel0.github.io/aisha-games/** — GitHub Pages serves
+`main` of `rkpatel0/aisha-games` as-is (`.nojekyll`, no build). Pushing to
+`main` updates the site within a minute or two. The repo is public.
+
+Real players have saved progress (Aisha in the Mac app, others in their
+browsers). Tests that win levels must save and restore the
+`aisha-games:abc-caterpillar*` localStorage keys.
+
 ## Testing
 
 The app itself needs no server, but browser automation can't drive `file://`.

@@ -5,6 +5,15 @@ window.AG = window.AG || {};
 
 AG.games = [
   {
+    id: 'abc-caterpillar',
+    title: 'ABC Caterpillar',
+    emoji: '🐛',
+    dir: 'games/abc-caterpillar/index.html',
+    blurb: 'Crawl through the letters A, B, C… and fill every square.',
+    players: '1 player',
+    accent: '#7ac943',
+  },
+  {
     id: 'petal-pairs',
     title: 'Petal Pairs',
     emoji: '🌸',
@@ -30,14 +39,5 @@ AG.games = [
     blurb: 'Program the robot with picture blocks.',
     players: '1 player',
     accent: '#2fc98a',
-  },
-  {
-    id: 'abc-caterpillar',
-    title: 'ABC Caterpillar',
-    emoji: '🐛',
-    dir: 'games/abc-caterpillar/index.html',
-    blurb: 'Crawl through the letters A, B, C… and fill every square.',
-    players: '1 player',
-    accent: '#7ac943',
   },
 ];

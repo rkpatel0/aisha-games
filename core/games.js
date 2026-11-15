@@ -40,4 +40,13 @@ AG.games = [
     players: '1 player',
     accent: '#2fc98a',
   },
+  {
+    id: 'bean-chain',
+    title: 'Bean Chain',
+    emoji: '🫘',
+    dir: 'games/bean-chain/index.html',
+    blurb: 'Add and take away beans — each answer starts the next sum.',
+    players: '1 player',
+    accent: '#58c4dd',
+  },
 ];

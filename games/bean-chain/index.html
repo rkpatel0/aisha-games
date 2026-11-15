@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bean Chain 🫘</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🫘</text></svg>">
+  <link rel="stylesheet" href="../../core/shell.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="ag-no-select bc-body">
+
+  <div class="bc-page">
+    <!-- the shared header is inserted here by core/shell.js -->
+
+    <div class="bc-tale">
+      <div class="bc-words" role="status" aria-live="polite">
+        <p class="bc-story"></p>
+        <p class="bc-question"></p>
+      </div>
+      <button class="bc-speak" type="button" title="Read it to me" aria-label="Read it to me">🔊</button>
+    </div>
+
+    <div class="bc-chain"></div>
+
+    <div class="bc-play">
+      <svg class="bc-jar" viewBox="0 0 640 360" aria-hidden="true"></svg>
+      <div class="bc-side">
+        <p class="bc-hud"></p>
+        <div class="bc-pad"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../core/util.js"></script>
+  <script src="../../core/store.js"></script>
+  <script src="../../core/audio.js"></script>
+  <script src="../../core/fx.js"></script>
+  <script src="../../core/shell.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

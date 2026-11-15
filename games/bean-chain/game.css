@@ -1,0 +1,269 @@
+/* ---------------- Bean Chain ---------------- */
+/* Every class here is prefixed .bc- so games never collide.
+   A dark 3Blue1Brown-style board: navy, glowing blue and brown. The colours
+   carry meaning and match between the words, the sums and the beans. */
+
+.bc-body {
+  --bc-ink: #ece6e2;
+  --bc-ink-soft: #9fb0c8;
+  --bc-blue: #58c4dd;
+  --bc-red: #fc6255;
+  --bc-yellow: #f7d96f;
+  --bc-green: #83c167;
+  --bc-bean: #b9814f;
+  --bc-bean-edge: #e3ad78;
+  --bc-panel: #16243a;
+  --bc-line: #2c4466;
+
+  color: var(--bc-ink);
+  background:
+    radial-gradient(1100px 700px at 20% -10%, #1d3557 0%, transparent 62%),
+    radial-gradient(900px 600px at 95% 110%, #1a2e3f 0%, transparent 60%),
+    linear-gradient(180deg, #0f1b2e 0%, #0a1220 100%);
+  background-attachment: fixed;
+}
+.bc-body .ag-title { color: var(--bc-ink); }
+.bc-body .ag-panel { color: var(--ag-ink); }   /* pop-ups stay light */
+.bc-body .ag-header .ag-icon-btn {
+  background: var(--bc-panel);
+  box-shadow: 0 0 0 2px var(--bc-line);
+}
+
+.bc-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: clamp(12px, 3vh, 30px);
+}
+
+/* the colour code */
+.bc-w { font-weight: 900; }
+.is-add { color: var(--bc-blue); }
+.is-take { color: var(--bc-red); }
+.is-total { color: var(--bc-yellow); }
+
+/* ---------- the story ---------- */
+
+.bc-tale {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 16px;
+  min-height: 5.4em;
+}
+.bc-words { text-align: center; }
+.bc-story, .bc-question { margin: 0; }
+.bc-story { font-size: clamp(22px, 2.7vw, 32px); font-weight: 800; line-height: 1.25; }
+.bc-question { margin-top: 6px; font-size: clamp(17px, 1.9vw, 23px); font-weight: 700; color: var(--bc-ink-soft); }
+.bc-story.is-bumped, .bc-question.is-bumped { animation: bc-bump 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes bc-bump { 40% { transform: scale(1.06); } }
+
+.bc-speak {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  border-radius: 50%;
+  font-size: 24px;
+  background: var(--bc-panel);
+  box-shadow: 0 0 0 2px var(--bc-line);
+  cursor: pointer;
+  transition: transform 0.12s;
+}
+.bc-speak:hover { transform: scale(1.08); }
+
+/* ---------- the chain of sums ---------- */
+
+.bc-chain {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4px 12px;
+  padding: clamp(6px, 1.4vh, 14px) 16px;
+  font-size: clamp(28px, 3.8vw, 46px);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  min-height: 1.6em;
+}
+.bc-tok { line-height: 1.2; }
+.bc-op { color: var(--bc-ink); opacity: 0.85; }
+.bc-op.is-add { color: var(--bc-blue); opacity: 1; }
+.bc-op.is-take { color: var(--bc-red); opacity: 1; }
+.bc-tok.is-solved { text-shadow: 0 0 14px currentColor; }
+.bc-twist { font-size: 0.6em; }
+
+.bc-blank {
+  min-width: 1.5em;
+  padding: 0 0.15em;
+  text-align: center;
+  border-bottom: 5px solid currentColor;
+  border-radius: 4px;
+}
+.bc-blank.is-active { animation: bc-glow 1.4s ease-in-out infinite; }
+.bc-blank.is-wrong { animation: bc-wiggle 0.35s; color: var(--bc-red); }
+@keyframes bc-glow { 50% { text-shadow: 0 0 18px currentColor; } }
+@keyframes bc-wiggle {
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* ---------- jar + number pad ---------- */
+
+.bc-play {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  gap: clamp(12px, 2.4vw, 36px);
+  padding: clamp(4px, 2vh, 24px) 16px 0;
+}
+
+.bc-jar {
+  display: block;
+  width: min(980px, 94vw, calc((100vh - 250px) * var(--bc-aspect, 1.78)));
+  height: auto;
+  overflow: visible;
+}
+
+.bc-side { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.bc-hud { margin: 0; font-size: 15px; font-weight: 700; color: var(--bc-ink-soft); }
+
+.bc-pad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+.bc-key {
+  width: clamp(50px, 5vw, 60px);
+  height: clamp(50px, 5vw, 60px);
+  font: inherit;
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 900;
+  color: var(--bc-ink);
+  background: var(--bc-panel);
+  border: 2px solid var(--bc-line);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.1s, border-color 0.15s, box-shadow 0.15s;
+}
+.bc-key:hover { border-color: var(--bc-blue); box-shadow: 0 0 14px rgba(88, 196, 221, 0.45); }
+.bc-key:active { transform: scale(0.94); }
+.bc-key:focus-visible { outline: 3px solid var(--bc-yellow); outline-offset: 2px; }
+.bc-key.is-zero { grid-column: 1 / -1; width: auto; }
+/* every fifth key starts a new row, so the pad mirrors the ten-frames */
+.bc-key:nth-child(10) { margin-bottom: 6px; }
+.bc-key.is-wrong { animation: bc-wiggle 0.35s; border-color: var(--bc-red); }
+.bc-key.is-right { border-color: var(--bc-green); box-shadow: 0 0 18px rgba(131, 193, 103, 0.7); }
+@keyframes bc-hold { to { opacity: 1; } }
+.bc-key.is-right { animation: bc-hold 0.7s; }
+
+/* ---------- SVG: jar, frames, beans ---------- */
+
+.bc-glass { fill: rgba(88, 196, 221, 0.04); stroke: var(--bc-ink); stroke-opacity: 0.7; stroke-width: 3; stroke-linejoin: round; }
+.bc-rim { stroke: var(--bc-ink); stroke-opacity: 0.7; stroke-width: 5; stroke-linecap: round; }
+.bc-frame { fill: none; stroke: var(--bc-ink-soft); stroke-opacity: 0.35; stroke-width: 2; transition: stroke 0.3s; }
+.bc-frame.is-full { animation: bc-frame-full 0.9s ease-out; }
+@keyframes bc-frame-full {
+  20% { stroke: var(--bc-yellow); stroke-opacity: 1; stroke-width: 5; filter: drop-shadow(0 0 8px var(--bc-yellow)); }
+}
+.bc-slot { fill: var(--bc-ink-soft); opacity: 0.3; }
+
+.bc-count {
+  fill: var(--bc-yellow);
+  font-family: var(--ag-font);
+  font-size: 52px;
+  font-weight: 900;
+  text-anchor: middle;
+  filter: drop-shadow(0 0 10px rgba(247, 217, 111, 0.5));
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.bc-count.is-pop, .bc-who.is-pop, .bc-ten.is-pop { animation: bc-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes bc-pop { 40% { transform: scale(1.25); } }
+
+.bc-who {
+  font-size: 66px;
+  text-anchor: middle;
+  dominant-baseline: central;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.bc-mystery, .bc-ten {
+  font-family: var(--ag-font);
+  font-weight: 900;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.bc-mystery { font-size: 60px; fill: var(--bc-blue); animation: bc-blink 1.3s ease-in-out infinite; }
+.bc-ten {
+  font-size: 22px;
+  fill: var(--bc-yellow);
+  text-anchor: start;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes bc-blink { 50% { opacity: 0.4; } }
+
+.bc-bean-body {
+  fill: var(--bc-bean);
+  stroke: var(--bc-bean-edge);
+  stroke-width: 2.5;
+  transition: fill 0.6s, stroke 0.6s;
+}
+.bc-bean-shine { fill: none; stroke: #fff; stroke-opacity: 0.45; stroke-width: 3; stroke-linecap: round; }
+.bc-bean.is-add .bc-bean-body { fill: #2e8fb0; stroke: var(--bc-blue); }
+.bc-bean.is-add { filter: drop-shadow(0 0 6px rgba(88, 196, 221, 0.8)); }
+.bc-bean.is-take .bc-bean-body { fill: #b8433a; stroke: var(--bc-red); }
+.bc-bean.is-take { filter: drop-shadow(0 0 6px rgba(252, 98, 85, 0.8)); }
+.bc-bean.is-mystery .bc-bean-body { stroke-dasharray: 5 4; }
+
+.bc-bean-num, .bc-ghost-num {
+  fill: #fff;
+  font-family: var(--ag-font);
+  font-size: 20px;
+  font-weight: 900;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+.bc-ghost-num { fill: var(--bc-blue); }
+
+.bc-ghost {
+  fill: rgba(88, 196, 221, 0.08);
+  stroke: var(--bc-blue);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 5;
+  animation: bc-blink 1.3s ease-in-out infinite;
+}
+.bc-ghost.is-ten { stroke: var(--bc-yellow); fill: rgba(247, 217, 111, 0.08); }
+
+/* ---------- level picker (inside the white overlay panel) ---------- */
+
+.bc-levels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+.bc-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px 4px;
+  font: inherit;
+  border: 3px solid transparent;
+  border-radius: 16px;
+  background: #eef4fb;
+  cursor: pointer;
+}
+.bc-level:hover:not(:disabled) { border-color: var(--bc-blue); }
+.bc-level:disabled { cursor: default; opacity: 0.5; }
+.bc-level.is-done { border-color: var(--bc-green); }
+.bc-level.is-here { background: #dff3f9; }
+.bc-level-num { font-size: 26px; font-weight: 900; color: #1f6f86; }
+.bc-level-info { font-size: 13px; font-weight: 700; color: var(--ag-ink-soft); }

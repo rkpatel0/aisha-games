@@ -11,6 +11,7 @@ Runs as a real Mac app, or straight from the browser. No internet needed.
 | 🌟 [Amaze!](games/amaze/) | 1 | Escape a randomly generated maze, collecting stars. 10 levels, 5×5 up to 21×21. |
 | 🤖 [Robot Steps](games/robot-steps/) | 1 | Program a robot with picture blocks. 15 levels, from straight lines to loops. |
 | 🐛 [ABC Caterpillar](games/abc-caterpillar/index.html) | 1 | Crawl through the letters in ABC order and fill every square. 25 levels — ABC order, then spelling words from level 15. Bouncy music. Grown-ups tab: 30 one-solution puzzles with hedges, mystery words, a timer and a daily puzzle. |
+| 🫘 [Bean Chain](games/bean-chain/index.html) | 1 | A running sum (3 + 2 = _ − 1 = _ …) where each answer starts the next. Little stories to read, beans flying in and out of a ten-frame jar in a dark 3Blue1Brown style. 12 levels up to 20, with doubles, make-10 and missing-number twists. |
 
 ## Playing
 

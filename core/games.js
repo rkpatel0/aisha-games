@@ -14,6 +14,15 @@ AG.games = [
     accent: '#7ac943',
   },
   {
+    id: 'bean-chain',
+    title: 'Bean Chain',
+    emoji: '🫘',
+    dir: 'games/bean-chain/index.html',
+    blurb: 'Add and take away beans — each answer starts the next sum.',
+    players: '1 player',
+    accent: '#58c4dd',
+  },
+  {
     id: 'petal-pairs',
     title: 'Petal Pairs',
     emoji: '🌸',
@@ -39,14 +48,5 @@ AG.games = [
     blurb: 'Program the robot with picture blocks.',
     players: '1 player',
     accent: '#2fc98a',
-  },
-  {
-    id: 'bean-chain',
-    title: 'Bean Chain',
-    emoji: '🫘',
-    dir: 'games/bean-chain/index.html',
-    blurb: 'Add and take away beans — each answer starts the next sum.',
-    players: '1 player',
-    accent: '#58c4dd',
   },
 ];

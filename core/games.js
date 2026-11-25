@@ -49,4 +49,13 @@ AG.games = [
     players: '1 player',
     accent: '#2fc98a',
   },
+  {
+    id: 'maze-speller',
+    title: 'Maze Speller',
+    emoji: '🔤',
+    dir: 'games/maze-speller/index.html',
+    blurb: 'Walk the maze and collect the letters to spell the word.',
+    players: '1 player',
+    accent: '#ff8a3d',
+  },
 ];

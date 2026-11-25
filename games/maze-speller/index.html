@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maze Speller 🔤</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🔤</text></svg>">
+  <link rel="stylesheet" href="../../core/shell.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="ag-no-select">
+
+  <div class="ms-page">
+    <!-- the shared header is inserted here by core/shell.js -->
+
+    <p class="ms-banner" role="status" aria-live="polite"></p>
+
+    <div class="ms-view ms-view--levels">
+      <div class="ms-levels"></div>
+    </div>
+
+    <div class="ms-view ms-view--maze" hidden>
+      <div class="ms-hud">
+        <button class="ms-clue" type="button" aria-label="Hear the word" title="Hear the word"></button>
+        <div class="ms-slots" aria-label="Letters spelled so far"></div>
+        <div class="ms-info">
+          <span class="ms-info-level">Level 1</span>
+          <span class="ms-info-clock">⏱ 0:00</span>
+        </div>
+      </div>
+      <div class="ms-board">
+        <canvas class="ms-canvas"></canvas>
+        <div class="ms-x" aria-hidden="true">✕</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../core/util.js"></script>
+  <script src="../../core/store.js"></script>
+  <script src="../../core/audio.js"></script>
+  <script src="../../core/fx.js"></script>
+  <script src="../../core/shell.js"></script>
+  <script src="words.js"></script>
+  <script src="maze.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

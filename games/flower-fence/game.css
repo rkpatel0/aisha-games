@@ -1,0 +1,285 @@
+/* ---------------- Flower Fence ---------------- */
+/* Every class here is prefixed .ff- so games never collide.
+   A dark 3Blue1Brown-style board, like Bean Chain. The colours carry the
+   meaning and match between the words, the fence and the sum:
+   rows are blue, how many in each row is green, the total is yellow. */
+
+.ff-body {
+  --ff-ink: #ece6e2;
+  --ff-ink-soft: #9fb0c8;
+  --ff-rows: #58c4dd;
+  --ff-cols: #83c167;
+  --ff-total: #f7d96f;
+  --ff-red: #fc6255;
+  --ff-fence: #d9a066;
+  --ff-panel: #16243a;
+  --ff-line: #2c4466;
+
+  color: var(--ff-ink);
+  background:
+    radial-gradient(1100px 700px at 20% -10%, #1d3557 0%, transparent 62%),
+    radial-gradient(900px 600px at 95% 110%, #1a2e3f 0%, transparent 60%),
+    linear-gradient(180deg, #0f1b2e 0%, #0a1220 100%);
+  background-attachment: fixed;
+}
+.ff-body .ag-title { color: var(--ff-ink); }
+.ff-body .ag-panel { color: var(--ag-ink); }   /* pop-ups stay light */
+.ff-body .ag-header .ag-icon-btn {
+  background: var(--ff-panel);
+  box-shadow: 0 0 0 2px var(--ff-line);
+}
+
+.ff-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: clamp(12px, 3vh, 30px);
+}
+
+/* the colour code */
+.ff-w { font-weight: 900; }
+.is-rows { color: var(--ff-rows); }
+.is-cols { color: var(--ff-cols); }
+.is-total { color: var(--ff-total); }
+
+/* ---------- the words ---------- */
+
+.ff-tale {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 16px;
+  min-height: 5.4em;
+}
+.ff-words { text-align: center; }
+.ff-story, .ff-question { margin: 0; }
+.ff-story { font-size: clamp(22px, 2.7vw, 32px); font-weight: 800; line-height: 1.25; }
+.ff-question { margin-top: 6px; font-size: clamp(17px, 1.9vw, 23px); font-weight: 700; color: var(--ff-ink-soft); min-height: 1.3em; }
+.ff-story.is-bumped, .ff-question.is-bumped { animation: ff-bump 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes ff-bump { 40% { transform: scale(1.06); } }
+
+.ff-speak {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  border-radius: 50%;
+  font-size: 24px;
+  background: var(--ff-panel);
+  box-shadow: 0 0 0 2px var(--ff-line);
+  cursor: pointer;
+  transition: transform 0.12s;
+}
+.ff-speak:hover { transform: scale(1.08); }
+
+/* ---------- the sum ---------- */
+
+.ff-eq {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding: clamp(4px, 1vh, 10px) 16px;
+  font-size: clamp(32px, 4.4vw, 52px);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  height: 1.6em;
+}
+.ff-tok { line-height: 1.2; }
+.ff-op { color: var(--ff-ink); opacity: 0.85; }
+.ff-tok.is-solved { text-shadow: 0 0 14px currentColor; }
+
+.ff-blank {
+  min-width: 1.5em;
+  padding: 0 0.15em;
+  text-align: center;
+  border-bottom: 5px solid currentColor;
+  border-radius: 4px;
+}
+.ff-blank.is-active { animation: ff-glow 1.4s ease-in-out infinite; }
+.ff-blank.is-wrong { animation: ff-wiggle 0.35s; color: var(--ff-red); }
+@keyframes ff-glow { 50% { text-shadow: 0 0 18px currentColor; } }
+@keyframes ff-wiggle {
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* ---------- garden + side panel ---------- */
+
+.ff-play {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  gap: clamp(12px, 2.4vw, 36px);
+  padding: clamp(4px, 1.5vh, 18px) 16px 0;
+}
+
+.ff-garden {
+  display: block;
+  width: min(600px, 94vw, calc((100vh - 300px) * var(--ff-aspect, 1.2)));
+  height: auto;
+  overflow: visible;
+}
+.ff-garden.is-building { cursor: pointer; touch-action: none; }
+
+.ff-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 250px;
+  min-height: 330px;
+}
+.ff-hud { margin: 0; font-size: 15px; font-weight: 700; color: var(--ff-ink-soft); }
+
+.ff-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+.ff-key {
+  width: 68px;
+  height: 62px;
+  font: inherit;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--ff-ink);
+  background: var(--ff-panel);
+  border: 2px solid var(--ff-line);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.1s, border-color 0.15s, box-shadow 0.15s;
+}
+.ff-key:hover { border-color: var(--ff-rows); box-shadow: 0 0 14px rgba(88, 196, 221, 0.45); }
+.ff-key:active { transform: scale(0.94); }
+.ff-key:focus-visible, .ff-go:focus-visible { outline: 3px solid var(--ff-total); outline-offset: 2px; }
+.ff-key.is-ok { color: #0f1b2e; background: var(--ff-cols); border-color: var(--ff-cols); }
+.ff-key.is-back { color: var(--ff-ink-soft); }
+
+.ff-go {
+  margin-top: 30px;
+  padding: 20px 28px;
+  white-space: nowrap;
+  font: inherit;
+  font-size: 28px;
+  font-weight: 900;
+  color: #0f1b2e;
+  background: var(--ff-total);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 0 22px rgba(247, 217, 111, 0.45);
+  transition: transform 0.12s;
+  animation: ff-breathe 1.8s ease-in-out infinite;
+}
+.ff-go:hover { transform: scale(1.05); }
+.ff-go:active { transform: scale(0.96); }
+.ff-plant { background: var(--ff-cols); box-shadow: 0 0 22px rgba(131, 193, 103, 0.5); }
+@keyframes ff-breathe { 50% { filter: brightness(1.15); } }
+
+/* ---------- SVG: soil, fence, flowers ---------- */
+
+/* the empty field only shows while she is stretching the fence over it */
+.ff-soil { fill: rgba(159, 176, 200, 0.07); stroke: var(--ff-ink-soft); stroke-opacity: 0.22; stroke-width: 1.5; opacity: 0; transition: opacity 0.4s; }
+.ff-garden.is-building .ff-soil { opacity: 1; }
+.ff-bed { fill: #3b2a1c; stroke: #5b432e; stroke-width: 2; }
+.ff-rowglow { fill: rgba(88, 196, 221, 0.2); stroke: var(--ff-rows); stroke-width: 3; animation: ff-fade 0.3s both; }
+@keyframes ff-fade { from { opacity: 0; } }
+
+.ff-fence {
+  fill: none;
+  stroke: var(--ff-fence);
+  stroke-width: 7;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 7px rgba(217, 160, 102, 0.6));
+  transition: opacity 0.6s;
+}
+.ff-labels { transition: opacity 0.5s; }
+.ff-garden.is-bare .ff-fence,
+.ff-garden.is-bare .ff-bed,
+.ff-garden.is-bare .ff-labels,
+.ff-garden.is-turning .ff-labels { opacity: 0; }
+.ff-handle { display: none; }
+.ff-garden.is-building .ff-handle { display: block; }
+.ff-handle circle {
+  fill: var(--ff-total);
+  stroke: #fff;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 8px var(--ff-total));
+  animation: ff-blink 1.3s ease-in-out infinite;
+}
+.ff-handle path { fill: none; stroke: #0f1b2e; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes ff-blink { 50% { opacity: 0.55; } }
+
+.ff-brace { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.ff-brace.is-rows { stroke: var(--ff-rows); }
+.ff-brace.is-cols { stroke: var(--ff-cols); }
+.ff-num, .ff-run, .ff-tiny {
+  font-family: var(--ag-font);
+  font-weight: 900;
+  text-anchor: middle;
+  dominant-baseline: central;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ff-num { font-size: 38px; }
+.ff-num.is-rows { fill: var(--ff-rows); }
+.ff-num.is-cols { fill: var(--ff-cols); }
+.ff-num.is-wrong { animation: ff-wiggle 0.35s; fill: var(--ff-red); }
+.ff-run { font-size: 36px; fill: var(--ff-total); filter: drop-shadow(0 0 8px rgba(247, 217, 111, 0.5)); transition: opacity 0.3s; }
+.ff-run.is-old { opacity: 0.45; }
+.ff-tiny { font-size: 17px; fill: #fff; stroke: #0f1b2e; stroke-width: 4; paint-order: stroke; pointer-events: none; }
+
+.ff-flower, .ff-animal {
+  font-size: 38px;
+  text-anchor: middle;
+  dominant-baseline: central;
+  transform-box: fill-box;
+  transform-origin: center;
+  pointer-events: none;
+}
+.ff-animal { font-size: 44px; }
+.ff-flower.is-new { animation: ff-pop-in 0.32s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes ff-pop-in { from { transform: scale(0); } }
+.is-pop { animation: ff-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes ff-pop { 40% { transform: scale(1.3); } }
+
+.ff-ghost {
+  fill: rgba(247, 217, 111, 0.06);
+  stroke: var(--ff-total);
+  stroke-width: 3;
+  stroke-dasharray: 8 7;
+  animation: ff-blink 1.3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ---------- level picker (inside the white overlay panel) ---------- */
+
+.ff-levels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+.ff-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px 4px;
+  font: inherit;
+  border: 3px solid transparent;
+  border-radius: 16px;
+  background: #eef4fb;
+  cursor: pointer;
+}
+.ff-level:hover:not(:disabled) { border-color: var(--ff-rows); }
+.ff-level:disabled { cursor: default; opacity: 0.5; }
+.ff-level.is-done { border-color: var(--ff-cols); }
+.ff-level.is-here { background: #dff3f9; }
+.ff-level-num { font-size: 26px; font-weight: 900; color: #1f6f86; }
+.ff-level-info { font-size: 13px; font-weight: 700; color: var(--ag-ink-soft); }

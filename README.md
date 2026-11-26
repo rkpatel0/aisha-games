@@ -13,6 +13,7 @@ Runs as a real Mac app, or straight from the browser. No internet needed.
 | 🐛 [ABC Caterpillar](games/abc-caterpillar/index.html) | 1 | Crawl through the letters in ABC order and fill every square. 25 levels — ABC order, then spelling words from level 15. Bouncy music. Grown-ups tab: 30 one-solution puzzles with hedges, mystery words, a timer and a daily puzzle. |
 | 🫘 [Bean Chain](games/bean-chain/index.html) | 1 | A running sum (3 + 2 = _ − 1 = _ …) where each answer starts the next. Little stories to read, beans flying in and out of a ten-frame jar in a dark 3Blue1Brown style. 12 levels up to 20, with doubles, make-10 and missing-number twists. |
 | 🔤 [Maze Speller](games/maze-speller/index.html) | 1 | Walk a little girl through a maze and pick up the letters, in order, to spell the word in the picture. Wrong letters show a big X (no limit); after two, the right one glows. 12 levels, from CAT in a 5×4 maze to 6-letter words in 12×8. Designed by Aisha. |
+| 🌷 [Flower Fence](games/flower-fence/index.html) | 1 | A first look at multiplication: a fence around rows of flowers, in the dark 3Blue1Brown style. A spoken 6-step lesson (2 rows of 2 is 2 × 2 = 4; turn the garden and 2 × 3 is still 3 × 2; snail counts by ones, bunny by rows), then 12 levels up to 5 × 5 — count a garden, build “3 rows of 4”, turn it, fit seeds into a fence, find the missing number. |
 
 ## Playing
 

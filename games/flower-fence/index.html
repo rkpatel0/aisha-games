@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flower Fence 🌷</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🌷</text></svg>">
+  <link rel="stylesheet" href="../../core/shell.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="ag-no-select ff-body">
+
+  <div class="ff-page">
+    <!-- the shared header is inserted here by core/shell.js -->
+
+    <div class="ff-tale">
+      <button class="ff-speak" type="button" title="Read it to me" aria-label="Read it to me">🔊</button>
+      <div class="ff-words" role="status" aria-live="polite">
+        <p class="ff-story"></p>
+        <p class="ff-question"></p>
+      </div>
+    </div>
+
+    <div class="ff-eq" aria-live="polite"></div>
+
+    <div class="ff-play">
+      <svg class="ff-garden" role="img" aria-label="The garden"></svg>
+
+      <div class="ff-side">
+        <p class="ff-hud"></p>
+        <div class="ff-pad" hidden></div>
+        <button class="ff-go ff-plant" type="button" hidden>Plant 🌱</button>
+        <button class="ff-go ff-next" type="button" hidden>Next ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../core/util.js"></script>
+  <script src="../../core/store.js"></script>
+  <script src="../../core/audio.js"></script>
+  <script src="../../core/fx.js"></script>
+  <script src="../../core/shell.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

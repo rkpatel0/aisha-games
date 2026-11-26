@@ -58,4 +58,13 @@ AG.games = [
     players: '1 player',
     accent: '#ff8a3d',
   },
+  {
+    id: 'flower-fence',
+    title: 'Flower Fence',
+    emoji: '🌷',
+    dir: 'games/flower-fence/index.html',
+    blurb: 'Rows of flowers in a fence — see what times means.',
+    players: '1 player',
+    accent: '#e6b422',
+  },
 ];

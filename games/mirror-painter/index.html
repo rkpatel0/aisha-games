@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mirror Painter 🦋</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🦋</text></svg>">
+  <link rel="stylesheet" href="../../core/shell.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="ag-no-select">
+
+  <div class="mp-page">
+    <!-- the shared header is inserted here by core/shell.js -->
+
+    <div class="mp-tale">
+      <button class="mp-speak" type="button" title="Read it to me" aria-label="Read it to me">🔊</button>
+      <div class="mp-words" role="status" aria-live="polite">
+        <p class="mp-story"></p>
+        <p class="mp-question"></p>
+      </div>
+    </div>
+
+    <div class="mp-play">
+      <div class="mp-board" role="img" aria-label="The painting"></div>
+
+      <div class="mp-side">
+        <p class="mp-hud"></p>
+        <div class="mp-palette"></div>
+        <div class="mp-row mp-freebar" hidden>
+          <button class="mp-tool mp-axis" type="button" data-axis="v" title="Side to side mirror" aria-label="Side to side mirror">↔️</button>
+          <button class="mp-tool mp-axis" type="button" data-axis="h" title="Up and down mirror" aria-label="Up and down mirror">↕️</button>
+          <button class="mp-tool mp-axis" type="button" data-axis="both" title="Two mirrors" aria-label="Two mirrors">➕</button>
+          <button class="mp-tool mp-clear" type="button" title="Clear the picture" aria-label="Clear the picture">🧹</button>
+        </div>
+        <button class="mp-go mp-next" type="button" hidden>Next ▶</button>
+        <button class="mp-go mp-check" type="button" hidden>Check 👀</button>
+        <button class="mp-go mp-tada" type="button" hidden>Ta-da! ✨</button>
+        <div class="mp-row mp-modes">
+          <button class="mp-mode mp-to-free" type="button">🎨 Paint</button>
+          <button class="mp-mode mp-to-puzzles" type="button">🧩 Puzzles</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../core/util.js"></script>
+  <script src="../../core/store.js"></script>
+  <script src="../../core/audio.js"></script>
+  <script src="../../core/fx.js"></script>
+  <script src="../../core/shell.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

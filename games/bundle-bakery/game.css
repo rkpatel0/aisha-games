@@ -1,0 +1,343 @@
+/* ---------------- Bundle Bakery ---------------- */
+/* Every class here is prefixed .bb- so games never collide.
+   The same dark board as Flower Fence and Bean Chain. The colours carry
+   the meaning and match between the words, the cookies and the number:
+   boxes of ten are blue, loose cookies are orange, the whole number is yellow. */
+
+.bb-body {
+  --bb-ink: #ece6e2;
+  --bb-ink-soft: #9fb0c8;
+  --bb-tens: #58c4dd;
+  --bb-ones: #ff9f5a;
+  --bb-total: #f7d96f;
+  --bb-green: #83c167;
+  --bb-red: #fc6255;
+  --bb-panel: #16243a;
+  --bb-line: #2c4466;
+
+  color: var(--bb-ink);
+  background:
+    radial-gradient(1100px 700px at 20% -10%, #1d3557 0%, transparent 62%),
+    radial-gradient(900px 600px at 95% 110%, #1a2e3f 0%, transparent 60%),
+    linear-gradient(180deg, #0f1b2e 0%, #0a1220 100%);
+  background-attachment: fixed;
+}
+.bb-body .ag-title { color: var(--bb-ink); }
+.bb-body .ag-panel { color: var(--ag-ink); }   /* pop-ups stay light */
+.bb-body .ag-header .ag-icon-btn {
+  background: var(--bb-panel);
+  box-shadow: 0 0 0 2px var(--bb-line);
+}
+
+.bb-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: clamp(10px, 2vh, 24px);
+}
+
+/* the colour code */
+.bb-w { font-weight: 900; }
+.bb-w.is-tens { color: var(--bb-tens); }
+.bb-w.is-ones { color: var(--bb-ones); }
+.bb-w.is-total { color: var(--bb-total); }
+
+/* ---------- the words ---------- */
+
+.bb-tale {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 16px;
+  min-height: 5em;
+}
+.bb-words { text-align: center; }
+.bb-story, .bb-question { margin: 0; }
+.bb-story { font-size: clamp(22px, 2.7vw, 32px); font-weight: 800; line-height: 1.25; }
+.bb-question { margin-top: 6px; font-size: clamp(17px, 1.9vw, 23px); font-weight: 700; color: var(--bb-ink-soft); min-height: 1.3em; }
+.bb-story.is-bumped, .bb-question.is-bumped { animation: bb-bump 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes bb-bump { 40% { transform: scale(1.06); } }
+
+.bb-speak {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  border-radius: 50%;
+  font-size: 24px;
+  background: var(--bb-panel);
+  box-shadow: 0 0 0 2px var(--bb-line);
+  cursor: pointer;
+  transition: transform 0.12s;
+}
+.bb-speak:hover { transform: scale(1.08); }
+
+/* ---------- the number: a boxes digit and a loose digit ---------- */
+
+.bb-num {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  height: 92px;
+  padding: 4px 16px 0;
+}
+.bb-digit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.bb-digit-n {
+  min-width: 1.15em;
+  padding: 0 0.12em;
+  text-align: center;
+  font-size: 54px;
+  line-height: 1.1;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 5px solid transparent;
+  border-radius: 6px;
+}
+.bb-digit-cap { font-size: 17px; line-height: 1; }
+.bb-digit.is-tens .bb-digit-n { color: var(--bb-tens); }
+.bb-digit.is-ones .bb-digit-n { color: var(--bb-ones); }
+.bb-digit.is-unknown .bb-digit-n { opacity: 0.4; }
+.bb-digit.is-active .bb-digit-n { border-bottom-color: currentColor; animation: bb-glow 1.4s ease-in-out infinite; }
+.bb-digit.is-solved .bb-digit-n { text-shadow: 0 0 14px currentColor; }
+.bb-digit.is-wrong .bb-digit-n { animation: bb-wiggle 0.35s; color: var(--bb-red); }
+.bb-digit.is-pulse .bb-digit-n { animation: bb-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2; }
+@keyframes bb-glow { 50% { text-shadow: 0 0 18px currentColor; } }
+@keyframes bb-wiggle {
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* ---------- stage + side panel ---------- */
+
+.bb-play {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  gap: clamp(12px, 2.4vw, 36px);
+  padding: clamp(4px, 1.2vh, 14px) 16px 0;
+}
+
+.bb-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(780px, 94vw, max(420px, calc(100vw - 330px)));
+}
+
+/* the shelf of boxes */
+.bb-shelf {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  align-content: start;
+  min-height: calc(2 * var(--bb-box-h) + 26px);
+  padding: 8px;
+  border-radius: 18px;
+  background: rgba(88, 196, 221, 0.06);
+  border: 2px dashed rgba(88, 196, 221, 0.3);
+}
+.bb-stage { --bb-box-h: clamp(52px, 9.5vh, 82px); }
+.bb-box {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 2px;
+  padding: 6px 6px 6px 36px;   /* room on the left for the "10" tag */
+  height: var(--bb-box-h);
+  border-radius: 10px;
+  background: #12304a;
+  border: 3px solid var(--bb-tens);
+}
+.bb-cell {
+  display: grid;
+  place-items: center;
+  font-size: clamp(12px, 2.3vh, 20px);
+  line-height: 1;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.07);
+}
+.bb-box.is-closed { box-shadow: 0 0 12px rgba(88, 196, 221, 0.35); }
+.bb-box.is-closed::after {
+  content: '10';
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  min-width: 30px;
+  padding: 3px 2px;
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+  color: #0f1b2e;
+  background: var(--bb-tens);
+  border-radius: 999px;
+}
+.bb-box.is-new { animation: bb-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.bb-box.is-open { border-style: dashed; }
+.bb-box.is-target { cursor: pointer; animation: bb-blink 1.2s ease-in-out infinite; }
+.bb-box.is-target::before {
+  content: '👆';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+}
+.bb-box.is-lit { background: rgba(88, 196, 221, 0.4); transform: scale(1.08); transition: transform 0.15s; }
+@keyframes bb-blink { 50% { box-shadow: 0 0 20px var(--bb-tens); background: #1b4a6e; } }
+
+/* the tray of loose cookies */
+.bb-tray {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+  gap: 2px 5px;
+  min-height: clamp(120px, 20vh, 170px);
+  padding: 10px 26px;
+  border-radius: 18px;
+  background: rgba(255, 159, 90, 0.06);
+  border: 2px dashed rgba(255, 159, 90, 0.32);
+}
+.bb-tray.is-target { cursor: pointer; }
+.bb-cookie {
+  font-size: clamp(28px, 5vh, 42px);
+  line-height: 1.15;
+  transform: rotate(var(--bb-tilt, 0deg)) translateY(var(--bb-drop, 0px));
+  pointer-events: none;
+}
+.bb-tray.is-many .bb-cookie { font-size: clamp(24px, 4vh, 34px); }
+.bb-cookie.is-new { animation: bb-pop-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.bb-cookie.is-lit { animation: bb-hop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); filter: drop-shadow(0 0 8px var(--bb-ones)); }
+@keyframes bb-pop-in { from { transform: scale(0); } }
+@keyframes bb-pop { 40% { transform: scale(1.25); } }
+@keyframes bb-hop { 40% { transform: scale(1.4); } }
+
+/* the running count, with whoever is counting */
+.bb-count {
+  position: absolute;
+  right: -6px;
+  bottom: -14px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--bb-panel);
+  box-shadow: 0 0 0 2px var(--bb-line);
+}
+.bb-animal { font-size: 32px; }
+.bb-run {
+  min-width: 1.3em;
+  text-align: center;
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--bb-total);
+  font-variant-numeric: tabular-nums;
+}
+.bb-run.is-pop { animation: bb-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+.bb-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 250px;
+  min-height: 330px;
+}
+.bb-hud { margin: 0; font-size: 15px; font-weight: 700; color: var(--bb-ink-soft); }
+
+.bb-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+.bb-key, .bb-step {
+  width: 68px;
+  height: 62px;
+  font: inherit;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--bb-ink);
+  background: var(--bb-panel);
+  border: 2px solid var(--bb-line);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.1s, border-color 0.15s, box-shadow 0.15s;
+}
+.bb-key:hover { border-color: var(--bb-tens); box-shadow: 0 0 14px rgba(88, 196, 221, 0.45); }
+.bb-key:active, .bb-step:active { transform: scale(0.94); }
+.bb-key:focus-visible, .bb-step:focus-visible, .bb-go:focus-visible { outline: 3px solid var(--bb-total); outline-offset: 2px; }
+.bb-key.is-ok { color: #0f1b2e; background: var(--bb-green); border-color: var(--bb-green); }
+.bb-key.is-back { color: var(--bb-ink-soft); }
+
+/* add and take away boxes and cookies */
+.bb-make { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.bb-make-row { display: flex; align-items: center; gap: 12px; }
+.bb-make-icon { font-size: 40px; width: 52px; text-align: center; }
+.bb-step { font-size: 36px; line-height: 1; }
+.bb-make-row.is-tens .bb-step { border-color: var(--bb-tens); color: var(--bb-tens); }
+.bb-make-row.is-ones .bb-step { border-color: var(--bb-ones); color: var(--bb-ones); }
+.bb-make-row.is-tens .bb-step:hover { box-shadow: 0 0 14px rgba(88, 196, 221, 0.5); }
+.bb-make-row.is-ones .bb-step:hover { box-shadow: 0 0 14px rgba(255, 159, 90, 0.5); }
+
+.bb-go {
+  margin-top: 24px;
+  padding: 20px 28px;
+  white-space: nowrap;
+  font: inherit;
+  font-size: 28px;
+  font-weight: 900;
+  color: #0f1b2e;
+  background: var(--bb-total);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 0 22px rgba(247, 217, 111, 0.45);
+  transition: transform 0.12s;
+  animation: bb-breathe 1.8s ease-in-out infinite;
+}
+.bb-go:hover { transform: scale(1.05); }
+.bb-go:active { transform: scale(0.96); }
+.bb-pack { background: var(--bb-tens); box-shadow: 0 0 22px rgba(88, 196, 221, 0.5); }
+.bb-done { margin-top: 6px; background: var(--bb-green); box-shadow: 0 0 22px rgba(131, 193, 103, 0.5); }
+@keyframes bb-breathe { 50% { filter: brightness(1.15); } }
+
+/* ---------- level picker (inside the white overlay panel) ---------- */
+
+.bb-levels {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+.bb-level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px 4px;
+  font: inherit;
+  border: 3px solid transparent;
+  border-radius: 16px;
+  background: #eef4fb;
+  cursor: pointer;
+}
+.bb-level:hover:not(:disabled) { border-color: var(--bb-tens); }
+.bb-level:disabled { cursor: default; opacity: 0.5; }
+.bb-level.is-done { border-color: var(--bb-green); }
+.bb-level.is-here { background: #dff3f9; }
+.bb-level-num { font-size: 26px; font-weight: 900; color: #1f6f86; }
+.bb-level-info { font-size: 12px; font-weight: 700; color: var(--ag-ink-soft); }

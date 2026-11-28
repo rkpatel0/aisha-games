@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bundle Bakery 🍪</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🍪</text></svg>">
+  <link rel="stylesheet" href="../../core/shell.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="ag-no-select bb-body">
+
+  <div class="bb-page">
+    <!-- the shared header is inserted here by core/shell.js -->
+
+    <div class="bb-tale">
+      <button class="bb-speak" type="button" title="Read it to me" aria-label="Read it to me">🔊</button>
+      <div class="bb-words" role="status" aria-live="polite">
+        <p class="bb-story"></p>
+        <p class="bb-question"></p>
+      </div>
+    </div>
+
+    <div class="bb-num" aria-live="polite"></div>
+
+    <div class="bb-play">
+      <div class="bb-stage">
+        <div class="bb-count" hidden>
+          <span class="bb-animal"></span>
+          <span class="bb-run"></span>
+        </div>
+        <div class="bb-shelf" aria-label="Boxes of ten"></div>
+        <div class="bb-tray" aria-label="Loose cookies"></div>
+      </div>
+
+      <div class="bb-side">
+        <p class="bb-hud"></p>
+        <div class="bb-pad" hidden></div>
+        <button class="bb-go bb-pack" type="button" hidden>Pack ten 📦</button>
+        <div class="bb-make" hidden>
+          <div class="bb-make-row is-tens">
+            <button class="bb-step" type="button" data-what="box" data-by="-1" aria-label="One box less">−</button>
+            <span class="bb-make-icon">📦</span>
+            <button class="bb-step" type="button" data-what="box" data-by="1" aria-label="One more box">+</button>
+          </div>
+          <div class="bb-make-row is-ones">
+            <button class="bb-step" type="button" data-what="cookie" data-by="-1" aria-label="One cookie less">−</button>
+            <span class="bb-make-icon">🍪</span>
+            <button class="bb-step" type="button" data-what="cookie" data-by="1" aria-label="One more cookie">+</button>
+          </div>
+          <button class="bb-go bb-done" type="button">Done ✓</button>
+        </div>
+        <button class="bb-go bb-next" type="button" hidden>Next ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../core/util.js"></script>
+  <script src="../../core/store.js"></script>
+  <script src="../../core/audio.js"></script>
+  <script src="../../core/fx.js"></script>
+  <script src="../../core/shell.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

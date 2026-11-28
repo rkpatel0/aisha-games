@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fair Share Picnic 🧺</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🧺</text></svg>">
+  <link rel="stylesheet" href="../../core/shell.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="ag-no-select fsp-body">
+
+  <div class="fsp-page">
+    <!-- the shared header is inserted here by core/shell.js -->
+
+    <div class="fsp-tale">
+      <button class="fsp-speak" type="button" title="Read it to me" aria-label="Read it to me">🔊</button>
+      <div class="fsp-words" role="status" aria-live="polite">
+        <p class="fsp-story"></p>
+        <p class="fsp-question"></p>
+      </div>
+    </div>
+
+    <div class="fsp-eq" aria-live="polite"></div>
+
+    <div class="fsp-play">
+      <div class="fsp-picnic">
+        <div class="fsp-top">
+          <button class="fsp-pile" type="button" aria-label="The basket of snacks">
+            <span class="fsp-basket" aria-hidden="true">🧺</span>
+            <span class="fsp-heap"></span>
+          </button>
+          <button class="fsp-dog" type="button" aria-label="Give the rest to the dog" hidden>
+            <span class="fsp-dogface" aria-hidden="true">🐶</span>
+            <span class="fsp-bowl"></span>
+            <span class="fsp-badge fsp-dogbadge"></span>
+          </button>
+        </div>
+        <div class="fsp-friends"></div>
+      </div>
+
+      <div class="fsp-side">
+        <p class="fsp-hud"></p>
+        <div class="fsp-pad" hidden></div>
+        <button class="fsp-go" type="button" hidden>Next ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../core/util.js"></script>
+  <script src="../../core/store.js"></script>
+  <script src="../../core/audio.js"></script>
+  <script src="../../core/fx.js"></script>
+  <script src="../../core/shell.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
